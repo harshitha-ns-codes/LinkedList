@@ -1,0 +1,77 @@
+Node* deleteHead(Node* head)
+{
+  if(head == NULL) return head;
+  Node* temp = head;
+  head = head->next;
+  free(temp);
+  return head;
+}
+
+Node* deleteTail(Node* hrad)
+{
+    if(head==NULL || head->next == NULL) return NULL;
+    Node* temp = head;
+    while(temp->next->next != NULL)
+    {
+        temp = temp->next;
+    }
+    free(temp->next);
+    temp->next = nullptr;
+    return head;
+}
+
+Node* deleteK(Node* head , int k)
+{
+    if(head == NULL) return head;
+
+    if(k==1)
+    {
+        Node* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+
+    int cnt =0;
+    prev = NULL;
+    Node* temp = head;
+    while(temp != NULL)
+    {
+        cnt++;
+        if(cnt == k)
+        prev->next = prev->next->next;
+        free(temp);
+        break;
+
+    }
+    temp = temp->next;
+    return head;
+}
+
+Node* deleteEl(Node* head , int El)
+{
+    if(head == NULL) return head;
+
+    if(head->data == El)
+    {
+        Node* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+
+   
+    prev = NULL;
+    Node* temp = head;
+    while(temp != NULL)
+    {
+        
+        if(temp->data == El)
+        prev->next = prev->next->next;
+        free(temp);
+        break;
+
+    }
+    temp = temp->next;
+    return head;
+}
