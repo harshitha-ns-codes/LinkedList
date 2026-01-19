@@ -1,0 +1,105 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node* next;
+
+    Node(int val, Node* nxt = NULL)
+    {
+        data = val;
+        next = nxt;
+    }
+};
+
+// Insert at K-th position (1-based indexing)
+Node* insertK(Node* head, int el, int k)
+{
+    if (k == 1)
+    {
+        return new Node(el, head);
+    }
+
+    int cnt = 1;
+    Node* temp = head;
+
+    while (temp != NULL)
+    {
+        if (cnt == k - 1)
+        {
+            Node* x = new Node(el, temp->next);
+            temp->next = x;
+            return head;
+        }
+        cnt++;
+        temp = temp->next;
+    }
+
+    return head;
+}
+
+// Insert before a given value
+Node* insertBeforeValue(Node* head, int el, int val)
+{
+    if (head == NULL)
+        return NULL;
+
+    if (head->data == val)
+    {
+        return new Node(el, head);
+    }
+
+    Node* temp = head;
+
+    while (temp->next != NULL)
+    {
+        if (temp->next->data == val)
+        {
+            Node* x = new Node(el, temp->next);
+            temp->next = x;
+            return head;
+        }
+        temp = temp->next;
+    }
+
+    return head;
+}
+
+// Print linked list
+void printList(Node* head)
+{
+    Node* temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    }
+    cout << "NULL" << endl;
+}
+
+int main()
+{
+    Node* head = NULL;
+
+    // Creating initial list: 10 -> 20 -> 30
+    head = new Node(10);
+    head->next = new Node(20);
+    head->next->next = new Node(30);
+
+    cout << "Original List:\n";
+    printList(head);
+
+    // Insert at K-th position
+    head = insertK(head, 15, 2);
+    cout << "\nAfter inserting 15 at position 2:\n";
+    printList(head);
+
+    // Insert before a given value
+    head = insertBeforeValue(head, 25, 30);
+    cout << "\nAfter inserting 25 before 30:\n";
+    printList(head);
+
+    return 0;
+}
