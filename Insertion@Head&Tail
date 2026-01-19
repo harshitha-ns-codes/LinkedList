@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val, Node* nextNode = NULL) {
+        data = val;
+        next = nextNode;
+    }
+};
+
+// Insert at Head
+Node* insertH(Node* head, int val)
+{
+    Node* temp = new Node(val, head);
+    return temp;
+}
+
+// Insert at Tail
+Node* insertT(Node* head, int val)
+{
+    if (head == NULL)
+        return new Node(val);
+
+    Node* temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+
+    Node* newNode = new Node(val);
+    temp->next = newNode;   // IMPORTANT LINE
+    return head;
+}
+
+// Print Linked List
+void printList(Node* head)
+{
+    Node* temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    }
+    cout << "NULL" << endl;
+}
+
+int main()
+{
+    Node* head = NULL;
+
+    // Insert at head
+    head = insertH(head, 10);
+    head = insertH(head, 20);
+    head = insertH(head, 30);
+
+    cout << "After inserting at head:" << endl;
+    printList(head);
+
+    // Insert at tail
+    head = insertT(head, 40);
+    head = insertT(head, 50);
+
+    cout << "After inserting at tail:" << endl;
+    printList(head);
+
+    return 0;
+}
