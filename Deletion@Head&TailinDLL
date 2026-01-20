@@ -1,0 +1,92 @@
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    Node* next;
+    Node* back;
+
+    Node(int val)
+    {
+        data = val;
+        next = NULL;
+        back = NULL;
+    }
+};
+
+// Delete Head
+Node* deleteH(Node* head)
+{
+    if (head == NULL || head->next == NULL)
+        return NULL;
+
+    Node* prev = head;
+    head = head->next;
+
+    head->back = NULL;
+    prev->next = NULL;
+
+    delete prev;
+    return head;
+}
+
+// Delete Tail
+Node* deleteTail(Node* head)
+{
+    if (head == NULL || head->next == NULL)
+        return NULL;
+
+    Node* tail = head;
+    while (tail->next != NULL)
+    {
+        tail = tail->next;
+    }
+
+    Node* prev = tail->back;
+    prev->next = NULL;
+    tail->back = NULL;
+
+    delete tail;
+    return head;
+}
+
+// Print list
+void printList(Node* head)
+{
+    Node* temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Main function
+int main()
+{
+    // Creating doubly linked list: 10 <-> 20 <-> 30
+    Node* head = new Node(10);
+    Node* second = new Node(20);
+    Node* third = new Node(30);
+
+    head->next = second;
+    second->back = head;
+
+    second->next = third;
+    third->back = second;
+
+    cout << "Original list: ";
+    printList(head);
+
+    head = deleteH(head);
+    cout << "After deleting head: ";
+    printList(head);
+
+    head = deleteTail(head);
+    cout << "After deleting tail: ";
+    printList(head);
+
+    return 0;
+}
