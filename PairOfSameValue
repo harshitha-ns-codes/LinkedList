@@ -1,0 +1,29 @@
+#include <vector>
+using namespace std;
+
+vector<pair<int,int>> findPairsWithSum(Node* head, int sum) {
+    vector<pair<int,int>> ans;
+
+    if (head == NULL)
+        return ans;
+
+    Node* left = head;
+    Node* right = findTail(head);
+
+    while (left != NULL && right != NULL && left != right && right->next != left) {
+        int currSum = left->data + right->data;
+
+        if (currSum == sum) {
+            ans.push_back({left->data, right->data});
+            left = left->next;
+            right = right->prev;
+        }
+        else if (currSum < sum) {
+            left = left->next;
+        }
+        else {
+            right = right->prev;
+        }
+    }
+    return ans;
+}
