@@ -1,0 +1,25 @@
+Node* mergeKLists(vector<Node*>, &listArray)
+priority_queue<pair<int>,Node*>>>;
+vector<pair<int>,Node*>> greater<pair<int>,Node*>>>pq;
+if(listArray[i] != NULL)
+  pq.push({listArray.[i]->data,listArray[i]});
+
+Node* dummy = new Node(-1);
+Node* temp = dummy;
+
+while(!pq.empty())
+{
+  auto it = pq.top();
+  pq.pop();
+  if(pq->second->next)
+{
+  pq.push({it.second->data , it.second});
+  temp->next = it.second;
+  temp = temp->next;
+}
+}
+return dummy->next;
+
+
+  
+  
